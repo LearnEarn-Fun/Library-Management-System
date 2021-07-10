@@ -57,11 +57,7 @@ def callback():
         users_email = userinfo_response.json()["email"]
         picture = userinfo_response.json()["picture"]
         users_name = userinfo_response.json()["given_name"]
-        users_password = generate_password_hash(
-            "default",
-            method='pbkdf2:sha256',
-            salt_length=8
-        )
+        users_password = "default"
     else:
         flash("User email not available or not verified by Google.", "error")
     user = User.query.filter_by(id=unique_id, name=users_name, email=users_email, password=users_password,
