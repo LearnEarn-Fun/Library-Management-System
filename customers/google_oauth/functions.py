@@ -62,7 +62,7 @@ def callback():
         flash("User email not available or not verified by Google.", "error")
     user = User.query.filter_by(id=unique_id, name=users_name, email=users_email, password=users_password,
                                 image=picture)
-    if not User.get(unique_id):
+    if not User.query.get(unique_id):
         new_user = User(
             id=unique_id, name=users_name, email=users_email,
             password=generate_password_hash(users_password, method='pbkdf2:sha256', salt_length=8), image=picture
