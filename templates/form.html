@@ -8,13 +8,11 @@
 <h1 style="text-align:center;">{{ title }} | {{ settings['website_config']['name'] }}</h1>
 <br>
 <div class="col-lg-8 col-md-10 mx-auto content">
-    {% for message in get_flashed_messages(with_categories=True) %}
+{% for message in get_flashed_messages(with_categories=True) %}
     {% if message[0] == "error" %}
     <div class="alert-error"><i class="fa fa-times-circle"></i> Error: {{ message[1] }}</div>
-    <br>
     {% elif message[0] == "success" %}
     <div class="alert-success"><i class="fa fa-check"></i> Success: {{ message[1] }}</div>
-    <br>
     {% elif message[0] == "info" %}
     <div class="alert-info"><i class="fa fa-info-circle"></i> Info: {{ message[1] }}</div>
     <br>
