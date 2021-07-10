@@ -20,7 +20,7 @@ def google_ouath():
 
     request_uri = client.prepare_request_uri(
         authorization_endpoint,
-        redirect_uri=request.base_url + "/callback",
+        redirect_uri=request.base_url + "callback",
         scope=["openid", "email", "profile"],
     )
     return redirect(request_uri)
