@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+        @import url('//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+</style>
+<br>
+<br>
+<h1 style="text-align:center;">Reports | {{ settings['website_config']['name'] }}</h1>
+<br>
+<br>
+<table class="table table-striped table-hover">
+  <tr>
+      <th>Month</th>
+      <th>Money Raised by Books</th>
+      <th>Money Raised by Membership</th>
+      <th>Books Rented</th>
+      <th>Total Money</th>
+  </tr>
+    {% for row in results.items %}
+    <tr>
+        <td>{{ months[row.id - 1]['month'] }}</td>
+        <td>${{ row.money_by_books }}</td>
+        <td>${{ row.money_by_membership }}</td>
+        <td>{{ row.books_rented }}</td>
+        <td>${{ money[row.id - 1]['money'] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% for page_num in results.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+{% if page_num: %}
+{% if results.page == page_num: %}
+{% if page_num != 1: %}
+<a class="btn btn-outline-info mb-4" href="{{ url_for('library_reports.report', page=page_num - 1) }}"><i class="fas fa-arrow-left"></i></a>
+{% endif %}
+<a class="btn btn-info mb-4" href="{{ url_for('library_reports.report', page=page_num) }}">{{ page_num }}</a>
+{% if page_num >= 1 and not page_num == last_page: %}
+<a class="btn btn-outline-info mb-4" href="{{ url_for('library_reports.report', page=page_num + 1) }}"><i class="fas fa-arrow-right"></i></a>
+{% endif %}
+{% else: %}
+<a class="btn btn-outline-info mb-4" href="{{ url_for('library_reports.report', page=page_num) }}">{{ page_num }}</a>
+
+{% endif %}
+{% else: %}
+...
+{% endif %}
+{% endfor %}
+{% endblock %}

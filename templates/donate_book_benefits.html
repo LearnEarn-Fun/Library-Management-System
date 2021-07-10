@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+
+{% block title %}Donate Book Benefits | {{ settings['website_config']['name'] }}{% endblock %}
+
+{% block content %}
+<html>
+<head>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+</head>
+<h1 style="text-align:center;">Donate Book Benefits | {{ settings['website_config']['name'] }}</h1>
+<br>
+<div class="col-lg-8 col-md-10 mx-auto content">
+    {% for message in get_flashed_messages(with_categories=True) %}
+    {% if message[0] == "error" %}
+    <div class="alert-error"><i class="fa fa-times-circle"></i> Error: {{ message[1] }}</div>
+    <br>
+    {% elif message[0] == "success" %}
+    <div class="alert-success"><i class="fa fa-check"></i> Success: {{ message[1] }}</div>
+    <br>
+    {% elif message[0] == "info" %}
+    <div class="alert-info"><i class="fa fa-info-circle"></i> Info: {{ message[1] }}</div>
+    <br>
+    {% endif %}
+    {% endfor %}
+    <div style="max-width: 1000px">
+        <ul>
+            <li>
+                <h4>Donate 2 Books, Get 1 month of Free Bronze Membership
+                    <button class="btn btn-primary" id="BronzeButton"><i class="fas fa-question"></i></button>
+                </h4>
+            </li>
+            <li>
+                <h4>Donate 4 Books, Get 1 month of Free Silver Membership
+                    <button class="btn btn-primary" id="SilverButton"><i class="fas fa-question"></i></button>
+                </h4>
+            </li>
+            <li>
+                <h4>Donate 6 Books, Get 1 month of Free Gold Membership
+                    <button class="btn btn-primary" id="GoldButton"><i class="fas fa-question"></i></button>
+                </h4>
+            </li>
+        </ul>
+        <br>
+    </div>
+    <div style="text-align: center;">
+        <a href="{{ url_for('donate_book.donate_new_book') }}">
+            <button class="btn btn-primary" style="size: 200px">Donate Now!</button>
+        </a>
+    </div>
+    <div class="modal" id="BronzeModal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <img src="{{ settings['membership_config']['bronze']['image'] }}" width="250" height="250" class="center">
+            <h2 align="center">Bronze Membership</h2>
+            <br>
+            <h3>Benefits</h3>
+            <ul>
+                <li>Lend 2 books together</li>
+                <li>Free 1 month membership costs {{ settings['membership_config']['bronze']['price']['monthly'] }}</li>
+            </ul>
+        </div>
+
+    </div>
+    <div class="modal" id="SilverModal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <img src="{{ settings['membership_config']['silver']['image'] }}" width="250" height="250" class="center">
+            <h2 align="center">Silver Membership</h2>
+            <br>
+            <h3>Benefits</h3>
+            <ul>
+                <li>Lend 4 books together</li>
+                <li>Free 1 month membership costs {{ settings['membership_config']['silver']['price']['monthly'] }}</li>
+            </ul>
+        </div>
+
+    </div>
+        <div class="modal" id="GoldModal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <img src="{{ settings['membership_config']['gold']['image'] }}" width="250" height="250" class="center">
+            <h2 align="center">Gold Membership</h2>
+            <br>
+            <h3>Benefits</h3>
+            <ul>
+                <li>Lend 6 books together</li>
+                <li>Free 1 month membership costs {{ settings['membership_config']['gold']['price']['monthly'] }}</li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+<script>
+        var bronzemodal = document.getElementById("BronzeModal");
+        var bronzebtn = document.getElementById("BronzeButton");
+        var span = document.getElementsByClassName("close")[0];
+        bronzebtn.onclick = function() {
+      bronzemodal.style.display = "block";
+    }
+    span.onclick = function() {
+      bronzemodal.style.display = "none";
+    }
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        bronzemodal.style.display = "none";
+      }
+    }
+    var silvermodal = document.getElementById("SilverModal");
+        var silverbtn = document.getElementById("SilverButton");
+        var span = document.getElementsByClassName("close")[1];
+        silverbtn.onclick = function() {
+      silvermodal.style.display = "block";
+    }
+    span.onclick = function() {
+      silvermodal.style.display = "none";
+    }
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        silvermodal.style.display = "none";
+      }
+    }
+    var goldmodal = document.getElementById("GoldModal");
+        var goldbtn = document.getElementById("GoldButton");
+        var span = document.getElementsByClassName("close")[2];
+        goldbtn.onclick = function() {
+      goldmodal.style.display = "block";
+    }
+    span.onclick = function() {
+      goldmodal.style.display = "none";
+    }
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        goldmodal.style.display = "none";
+      }
+    }
+    </script>
+{% endblock %}

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>{{ settings['website_config']['name'] }}</title>
+    <link rel="icon" href="../static/icon.png">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          rel="stylesheet">
+    <link href="\static\css\styles.css" rel="stylesheet">
+    <script crossorigin="anonymous"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css"
+          rel="stylesheet">
+    <script src="https://kit.fontawesome.com/d00b6a268f.js" crossorigin="anonymous"></script>
+    <script crossorigin="anonymous"
+            integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<style>
+    @import url({{ settings['website_config']['font'] }});
+          * {
+          font-family: {{ settings['website_config']['font'].split("=")[1].split(":")[0] }};
+          }
+</style>
+<body>
+<header>
+    {% block header %}
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <!-- Container wrapper -->
+        <div class="container-fluid">
+            <!-- Toggle button -->
+            <button
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                    class="navbar-toggler"
+                    data-mdb-target="#navbarSupportedContent"
+                    data-mdb-toggle="collapse"
+                    type="button"
+            >
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <!-- Collapsible wrapper -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Navbar brand -->
+                <a class="navbar-brand mt-2 mt-lg-0" href="{{ url_for('home.homepage') }}">
+                    <img
+                            alt=""
+                            height="45"
+                            src="{{ settings['website_config']['icon'] }}"
+                    />
+                </a>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <div class="dropdown">
+                        <button aria-expanded="false" class="btn btn-secondary dropdown-toggle"
+                                data-bs-toggle="dropdown"
+                                id="dropdownMenuButton2" type="button" style="margin-right: 25px;">
+                            Books
+                        </button>
+                        <ul aria-labelledby="dropdownMenuButton2" class="dropdown-menu">
+                            {% if admin: %}
+                            <li><a class="dropdown-item" href="{{ url_for('add_book.add_new_book') }}">{{ settings['menu']['book']['add_book'] }}</a>
+                            </li>
+                            <li><a class="dropdown-item" href="{{ url_for('delete_book.select_book') }}">{{ settings['menu']['book']['delete_book'] }}</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('update_book.select_book') }}">{{ settings['menu']['book']['update_book'] }}</a>
+                            <li><hr class="dropdown-divider"></li>
+                            {% endif %}
+                            {% if current_user.is_authenticated %}
+                            <li><a class="dropdown-item" href="{{ url_for('my_books.my_book') }}">{{ settings['menu']['book']['my_book'] }}</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('issue_book.lend_book_options') }}">{{ settings['menu']['book']['issue_book'] }}</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{{ url_for('donate_book.donate_book_benefits') }}">{{ settings['menu']['book']['donate_book'] }}</a></li>
+                            {% if admin: %}
+                            <li><a class="dropdown-item" href="{{ url_for('review_book.select_book') }}">{{ settings['menu']['book']['review_book'] }}</a></li>
+                            {% endif %}
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{{ url_for('return_books.return_book_view') }}">{{ settings['menu']['book']['return_book'] }}</a></li>
+                            {% if membership != "None" %}
+                            <li><a class="dropdown-item" href="{{ url_for('return_books.return_all_together') }}">{{ settings['menu']['book']['return_books'] }}</a></li>
+                            {% endif %}
+                            {% endif %}
+                        </ul>
+                    </div>
+                    {% if admin: %}
+                        <div class="dropdown">
+                        <button aria-expanded="false" class="btn btn-secondary dropdown-toggle"
+                                data-bs-toggle="dropdown"
+                                id="dropdownMenuButton6" type="button" style="margin-right: 25px;">
+                            Library Stats
+                        </button>
+                        <ul aria-labelledby="dropdownMenuButton6" class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ url_for('library_reports.report') }}">Reports</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('user_table.user_table_') }}">User Table</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('payment_logs.payment_log') }}">Payment Logs</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('website_logs.website_log') }}">Website Logs</a></li>
+                        </ul>
+                    </div>
+                    {% endif %}
+                    {% if admin: %}
+                        <div class="dropdown">
+                        <button aria-expanded="false" class="btn btn-secondary dropdown-toggle"
+                                data-bs-toggle="dropdown"
+                                id="dropdownMenuButton7" type="button" style="margin-right: 25px;">
+                            Settings
+                        </button>
+                        <ul aria-labelledby="dropdownMenuButton7" class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ url_for('settings.setting') }}">Settings</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('settings.reset_settings') }}">Reset all Settings</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('settings.update_website_config') }}">Website Configuration</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('settings.update_book_menu_config') }}">Book Menu Configuration</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('settings.update_footer_config') }}">Footer Configuration</a></li>
+                        </ul>
+                    </div>
+                    {% endif %}
+                    <div class="dropdown">
+                        <button aria-expanded="false" class="btn btn-secondary dropdown-toggle"
+                                data-bs-toggle="dropdown"
+                                id="dropdownMenuButton1" type="button" style="margin-right: 25px;">
+                            Search
+                        </button>
+                        <ul aria-labelledby="dropdownMenuButton1" class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ url_for('search._search') }}">Search</a></li>
+                        </ul>
+                    </div>
+                    {% if not current_user.is_authenticated: %}
+                    <div class="dropdown">
+                        <button aria-expanded="false" class="btn btn-secondary dropdown-toggle"
+                                data-bs-toggle="dropdown"
+                                id="dropdownMenuButton3" type="button">
+                            Sign-In
+                        </button>
+                        <ul aria-labelledby="dropdownMenuButton3" class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ url_for('register.register_user') }}">Register</a>
+                            </li>
+                            <li><a class="dropdown-item" href="{{ url_for('log_in_out.login_options') }}">Login</a></li>
+                        </ul>
+                    </div>
+                    {% endif %}
+                    {% if current_user.is_authenticated: %}
+                    <div class="dropdown" style="position: absolute;right: 0;">
+                        <button class="btn" type="button" style="background-color: #343C44" ></button>
+                        <button aria-expanded="false" class="btn btn-secondary dropdown-toggle"
+                                data-bs-toggle="dropdown"
+                                id="dropdownMenuButton4" type="button" style="margin-right: 85px;">
+                            <img class="img-responsive rounded-circle" height="25" src="{{ image }}"
+                                 style="padding:2%;"/>
+                        </button>
+                        <ul aria-labelledby="dropdownMenuButton4" class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ url_for('my_profile.my_profile_view', id=id) }}">My Profile</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('edit_profile.edit_profile_view', id=id) }}">Edit Profile</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('my_books.my_book') }}">My Books</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{{ url_for('membership.membership_options') }}">Buy a membership</a></li>
+                            {% if membership['membership'] != "None" and is_valid %}
+                            <li><a class="dropdown-item" href="{{ url_for('membership.cancel_membership') }}">Cancel Membership</a></li>
+                            {% endif %}
+                            <li><a class="dropdown-item" href="{{ url_for('request_history.request_history_', id=id) }}">Request History</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{{ url_for('delete_profile.delete_profile_view', id=id) }}">Delete Profile</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('log_in_out.logout') }}">Logout</a></li>
+                        </ul>
+                    </div>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    {% endblock %}
+</header>
+<!-- <br><br><br><br> -->
+<main class="container" role="main">
+    {% block content %} {% endblock %}
+</main>
+<br>
+<br>
+{% include 'footer.html' %}
+
+</body>
+
+</html>

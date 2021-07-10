@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ error }} | {{ settings['website_config']['name'] }}{% endblock %}
+
+{% block content %}
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<br>
+<br>
+<br>
+<div class="container">
+    <div class="alert-error">
+        <br>
+        <h1 style="text-align:center;">{{ error }}</h1>
+        <br>
+        <p style="text-align:center;">{{ error_description }}</p>
+        <p style="text-align:center;"><a href="{{ url_for('home.homepage') }}">Click here</a> to go back home</p>
+        <br>
+    </div>
+</div>
+
+{% endblock %}

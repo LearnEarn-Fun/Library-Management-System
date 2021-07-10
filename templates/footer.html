@@ -1,0 +1,112 @@
+<style>
+
+/*---------------------------------------
+   Social section
+ -----------------------------------------*/
+
+.fa {
+  padding: 20px;
+  font-size: 23px;
+  width: 60px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+  border-radius: 50%;
+}
+.fab {
+  padding: 20px;
+  font-size: 23px;
+  width: 60px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+  border-radius: 50%;
+}
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+margin-top: 30px;
+}
+.fa-facebook:hover {
+color: white;
+    opacity: 0.5;
+    text-decoration: none;
+}
+.fa-github {
+  background: #000;
+  color: white;
+margin-top: 30px;
+}
+.fa-github:hover {
+color: white;
+    opacity: 0.5;
+    text-decoration: none;
+}
+.fa-twitter {
+  background: #55ACEE;
+  color: white;
+}
+.fa-twitter:hover {
+color: white;
+    opacity: 0.5;
+    text-decoration: none;
+}
+.fa-instagram {
+  background: #E1306C;
+  color: white;
+}
+.fa-instagram:hover {
+color: white;
+    opacity: 0.5;
+    text-decoration: none;
+}
+.fa-linkedin {
+  background: #0077b5;
+  color: white;
+}
+.fa-linkedin:hover {
+color: white;
+    opacity: 0.5;
+    text-decoration: none;
+}
+.fa-youtube {
+  background: #FF0000;
+  color: white;
+}
+.fa-youtube:hover {
+    color: white;
+    opacity: 0.5;
+    text-decoration: none;
+}
+.fa-dev {
+  background: #000;
+  color: white;
+}
+.fa-dev:hover {
+    color: white;
+    opacity: 0.5;
+    text-decoration: none;
+}
+p {
+text-align:center;
+
+}
+
+
+</style>
+<script src="https://kit.fontawesome.com/d00b6a268f.js" crossorigin="anonymous"></script>
+<footer>
+
+    <p>
+        <a class="fa fa-facebook" href="{{ settings['footer_config']['facebook'] }}"></a>
+        <a class="fa fa-instagram" href="{{ settings['footer_config']['instagram'] }}"></a>
+        <a class="fa fa-twitter" href="{{ settings['footer_config']['twitter'] }}"></a>
+        <a class="fa fa-linkedin" href="{{ settings['footer_config']['linkedin'] }}"></a>
+        <a class="fa fa-github" href="{{ settings['footer_config']['github'] }}"></a>
+        <a class="fa fa-youtube" href="{{ settings['footer_config']['youtube'] }}"></a>
+        <a class="fab fa-dev" href="{{ settings['footer_config']['dev'] }}"></a>
+    </p>
+  <div class="footer-copyright text-center py-3">{{ settings['footer_config']['text'] }}
+  </div>
+    <br>
+</footer>

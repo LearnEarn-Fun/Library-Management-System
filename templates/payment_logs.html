@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<script crossorigin="anonymous" src="https://kit.fontawesome.com/d00b6a268f.js"></script>
+<br>
+<br>
+<h1>Payment Logs | {{ settings['website_config']['name'] }}</h1>
+<br>
+<br>
+<div class="dropdown">
+  <button class="btn btn-primary dropdown-toggle mb-4" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+      Sort By
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <li><a class="dropdown-item" href="{{ url_for('payment_logs.payment_log', filter_by='desc') }}">New Payments</a></li>
+    <li><a class="dropdown-item" href="{{ url_for('payment_logs.payment_log', filter_by='aces') }}">Old Payments</a></li>
+  </ul>
+</div>
+<input class="form-control mb-4" id="myInput" type="text" placeholder="Search.." style="width:250px;text-align:center;">
+<p>Total Money: <b>${{ total_money }}</b></p>
+<table class="table table-hover" id="myTable">
+    <tr>
+        <th>Payment Money</th>
+        <th>Payment by</th>
+        <th>Payment for</th>
+        <th>Payment On</th>
+    </tr>
+    {% for row in results.items %}
+    <tr>
+        <td>{{ row.payment_history['money'] }}</td>
+        <td><a href="{{ url_for('my_profile.my_profile_view', id=row.payment_history['by'].id) }}">{{ row.payment_history['by'].name }}</a></td>
+        <td>{{ row.payment_history['for'] }}</td>
+        <td>{{ row.payment_history['on'] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% for page_num in results.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+{% if page_num: %}
+{% if results.page == page_num: %}
+{% if page_num != 1: %}
+<a class="btn btn-outline-info mb-4" href="{{ url_for('payment_logs.payment_log', page=page_num - 1) }}"><i class="fas fa-arrow-left"></i></a>
+{% endif %}
+<a class="btn btn-info mb-4" href="{{ url_for('payment_logs.payment_log', page=page_num) }}">{{ page_num }}</a>
+{% if page_num >= 1 and not page_num == last_page: %}
+<a class="btn btn-outline-info mb-4" href="{{ url_for('payment_logs.payment_log', page=page_num + 1) }}"><i class="fas fa-arrow-right"></i></a>
+{% endif %}
+{% else: %}
+<a class="btn btn-outline-info mb-4" href="{{ url_for('payment_logs.payment_log', page=page_num) }}">{{ page_num }}</a>
+{% endif %}
+{% else: %}
+...
+{% endif %}
+{% endfor %}
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+{% endblock %}

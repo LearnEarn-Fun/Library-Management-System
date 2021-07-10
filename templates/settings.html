@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.card {
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  border-radius: 5px;
+}
+
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+/* Add some padding inside the card container */
+.container {
+  padding: 2px 16px;
+}
+img {
+  border-radius: 5px 5px 0 0;
+}
+
+</style>
+<script crossorigin="anonymous" src="https://kit.fontawesome.com/d00b6a268f.js"></script>
+<h1 align="center">Settings | {{ settings['website_config']['name'] }}</h1>
+<br>
+<div class="card d-inline-flex" style="max-width:450px">
+    <br>
+    <img class="center" height="300" src="https://www.silicon.co.uk/wp-content/uploads/2012/11/beboy.jpg" width="400">
+    <div class="container">
+        <h2 align="center">Website Settings</h2>
+        <br>
+        <div style="text-align: center;">
+            <a href="{{ url_for('settings.update_website_config') }}">
+                <button class="btn btn-primary">Configure Website Settings</button>
+            </a>
+        </div>
+        <br>
+    </div>
+</div>
+<div class="card d-inline-flex" style="max-width:400px">
+    <br>
+    <img class="center" height="300" src="https://cdn.iconscout.com/icon/free/png-256/dropdown-arrow-457731.png" width="300">
+    <div class="container">
+        <h2 align="center">Book Menu Settings</h2>
+        <br>
+        <div style="text-align: center;">
+            <a href="{{ url_for('settings.update_book_menu_config') }}">
+                <button class="btn btn-primary">Configure Book Menu Settings</button>
+            </a>
+        </div>
+        <br>
+    </div>
+</div>
+
+<div class="card d-inline-flex" style="max-width:350px">
+    <br>
+    <img class="center" height="300" src="https://inteng-storage.s3.amazonaws.com/img/iea/rV6ndqlOXq/sizes/social-media_md.jpg" width="300">
+    <div class="container">
+        <h2 align="center">Footer Settings</h2>
+        <br>
+        <div style="text-align: center;">
+            <a href="{{ url_for('settings.update_footer_config') }}">
+                <button class="btn btn-primary">Configure Footer Settings</button>
+            </a>
+        </div>
+        <br>
+    </div>
+</div>
+{% endblock %}

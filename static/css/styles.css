@@ -1,0 +1,232 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body>.container {
+    padding: 80px 15px 0;
+}
+
+.header-main {
+    background-color: #1d2939;
+    color: #5bc0de;
+    padding: 2rem;
+}
+
+.title-head {
+    color: #5bc0de;
+}
+
+.title-head:hover {
+    text-decoration: none;
+    color: #5bc0de;
+}
+
+.navbar-user {
+    background-color: #1d2939;
+    color: #5bc0de;
+    font-weight: 600;
+    justify-content: normal !important;
+}
+
+.navbar-user:hover {
+    color: white;
+}
+
+.index-image {
+    height: auto;
+    width: 100%;
+    padding-bottom: 20px;
+}
+
+.req-table {
+    margin-top: 20px;
+}
+
+.req_body1,
+.req_body2,
+.req_body3,
+.req_body4,
+.req_body5 {
+    display: none;
+}
+
+.alert-error {
+      padding: 8px;
+          color: #D8000C;
+    background-color: #FFD2D2;
+      }
+      .alert-success {
+            padding: 8px;
+          color: #4F8A10;
+    background-color: #DFF2BF;
+      }
+      .alert-info {
+            padding: 8px;
+    color: #00529B;
+    background-color: #BDE5F8;
+      }
+      .arrival-heading strong{
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    color: #1b1919;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-top: 40px;
+    padding: 5px 30px;
+    border: 1px solid #e0e0e0;
+}
+.arrival-heading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.arrival-heading strong{
+    color: #ffffff;
+    background-color: #202020;
+    font-weight: 500;
+}
+.arrival-heading p{
+    color: #808080;
+    margin: 10px;
+    font-size: 0.9rem;
+}
+.product-container{
+    width:90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+.product-box{
+    display: flex;
+    flex-grow: 0.5;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #f7f7f7;
+    border-radius: 10px;
+    margin: 20px;
+}
+.product-img{
+    width:200px;
+    height: 210px;
+    margin: 20px;
+    cursor: pointer;
+    position: relative;
+}
+.product-img img{
+    width:100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+}
+.product-details{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 10px 20px;
+    border-top: 1px solid #f3f3f3;
+}
+.p-name{
+    color: #727272;
+}
+.p-price{
+    color: #333333;
+    font-size: 1.2rem;
+    font-weight: 400;
+}
+.product-box:hover{
+    box-shadow: 2px 2px 30px rgba(0,0,0,0.1);
+}
+.add-cart{
+    position: absolute;
+    right: -20px;
+    top: 10px;
+    width:50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    background-color: #0b9d8a;
+    box-shadow: 2px 2px 30px rgba(0,0,0,0.1);
+    display: none;
+    animation: fade 0.3s;
+
+}
+.add-cart:hover{
+    background-color: #f76b6a;
+    transition: all ease 0.2s;
+}
+.product-box:hover .add-cart{
+    display: flex;
+}
+.new-arrival{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 30%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+      .alert-error {
+      padding: 8px;
+          color: #D8000C;
+    background-color: #FFD2D2;
+      }
+      .alert-success {
+            padding: 8px;
+          color: #4F8A10;
+    background-color: #DFF2BF;
+      }
+      .alert-info {
+            padding: 8px;
+    color: #00529B;
+    background-color: #BDE5F8;
+      }
+      .center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+

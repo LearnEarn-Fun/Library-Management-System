@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Logged Out | {{ settings['website_config']['name'] }}
+{% endblock %}
+
+{% block content %}
+<style>
+    @import url('//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+          .alert-success {
+            padding: 8px;
+          color: #4F8A10;
+    background-color: #DFF2BF;
+      }
+</style>
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+<div class="alert-success">
+    <div class="container">
+        <h1 style="text-align:center;">Logged Out!</h1>
+        <br>
+        <p style="text-align:center;"><a href="{{ url_for('log_in_out.login') }}">Click here</a> to login again.</p>
+        <p style="text-align:center;"><a href="{{ url_for('home.homepage') }}">Click here</a> to go back home</p>
+    </div>
+</div>
+{% endblock %}

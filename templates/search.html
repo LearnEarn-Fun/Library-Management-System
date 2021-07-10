@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Search | {{ settings['website_config']['name'] }}{% endblock %}
+
+{% block content %}
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<style>
+      @import url('//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+      .alert-error {
+      padding: 8px;
+          color: #D8000C;
+    background-color: #FFD2D2;
+      }
+      .alert-success {
+            padding: 8px;
+          color: #4F8A10;
+    background-color: #DFF2BF;
+      }
+      .alert-info {
+            padding: 8px;
+    color: #00529B;
+    background-color: #BDE5F8;
+      }
+
+
+</style>
+<h1 style="text-align:center;">Search | {{ settings['website_config']['name'] }}</h1>
+<br>
+<div class="col-lg-8 col-md-10 mx-auto content">
+    {% for message in get_flashed_messages(with_categories=True) %}
+    {% if message[0] == "error" %}
+    <div class="alert-error"><i class="fa fa-times-circle"></i> Error: {{ message[1] }}</div>
+    <br>
+    {% elif message[0] == "success" %}
+    <div class="alert-success"><i class="fa fa-check"></i> Success: {{ message[1] }}</div>
+    <br>
+    {% elif message[0] == "info" %}
+    <div class="alert-info"><i class="fa fa-info-circle"></i> Info: {{ message[1] }}</div>
+    <br>
+    {% endif %}
+    {% endfor %}
+    {{ wtf.quick_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+</div>
+{% endblock %}

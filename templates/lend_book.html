@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %}Rent Book | {{ settings['website_config']['name'] }}{% endblock %}
+
+{% block content %}
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<div class="col-lg-8 col-md-10 mx-auto content">
+    {% for message in get_flashed_messages(with_categories=True) %}
+    {% if message[0] == "error" %}
+    <div class="alert-error"><i class="fa fa-times-circle"></i> Error: {{ message[1] }}</div>
+    <br>
+    {% elif message[0] == "success" %}
+    <div class="alert-success"><i class="fa fa-check"></i> Success: {{ message[1] }}</div>
+    <br>
+    {% elif message[0] == "info" %}
+    <div class="alert-info"><i class="fa fa-info-circle"></i> Info: {{ message[1] }}</div>
+    <br>
+    {% endif %}
+    {% endfor %}
+</div>
+<h1 style="text-align: center;">Rent a Book | {{ settings['website_config']['name'] }}</h1>
+<section class="new-arrival">
+
+    <!--heading-------->
+    <div class="arrival-heading">
+        <strong>Which book do you want to rent?</strong>
+    </div>
+    <!--products----------------------->
+    <div class="product-container">
+        {% for row in results.items %}
+        {% if row['is_free'] == True: %}
+        <div class="product-box">
+            <div class="product-img">
+                <img src="{{ row['img'] }}">
+            </div>
+            <div class="product-details">
+                <a class="p-name" href="#">{{ row['name'] }}</a>
+                <a class="p-name" href="#">Written by {{ row['author'] }}</a>
+                <span class="p-price">{{ row['price'] }}</span>
+                <br>
+                <a href="{{ url_for('issue_book.request_book', id=row['id']) }}">
+                    <button type="button" class="btn btn-primary">Rent Book</button></a>
+                <br>
+                <a href="{{ url_for('preview_book.preview_books', name=row['name'], id=row['id']) }}">
+                    <button type="button" class="btn btn-primary">Preview Book</button></a>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+    </div>
+    </div>
+</section>
+{% for page_num in results.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+{% if page_num: %}
+{% if results.page == page_num: %}
+{% if page_num != 1: %}
+<a class="btn btn-outline-info mb-4" href="{{ url_for('issue_book.lend_book_options', page=page_num - 1) }}"><i class="fas fa-arrow-left"></i></a>
+{% endif %}
+<a class="btn btn-info mb-4" href="{{ url_for('issue_book.lend_book_options', page=page_num) }}">{{ page_num }}</a>
+{% if page_num >= 1 and not page_num == last_page: %}
+<a class="btn btn-outline-info mb-4" href="{{ url_for('issue_book.lend_book_options', page=page_num + 1) }}"><i class="fas fa-arrow-right"></i></a>
+{% endif %}
+{% else: %}
+<a class="btn btn-outline-info mb-4" href="{{ url_for('issue_book.lend_book_options', page=page_num) }}">{{ page_num }}</a>
+
+{% endif %}
+{% else: %}
+...
+{% endif %}
+{% endfor %}
+</div>
+{% endblock %}
