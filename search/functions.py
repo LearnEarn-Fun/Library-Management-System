@@ -19,4 +19,4 @@ def _search():
             users = User.query.msearch(form.search.data).all()
             return handle_page('results.html', no_results=len(users), results=users, title="Users", books=False,
                                query=form.search.data)
-    return handle_page('search.html', form=form)
+    return handle_page('form.html', form=form, title="Search")
