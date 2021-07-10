@@ -12,7 +12,6 @@ def _search():
     if form.validate_on_submit():
         if form.category.data == "Books":
             books = Book.query.msearch(form.search.data).all()
-            print(books)
             return handle_page('results.html', no_results=len(books), results=books, title="Books", books=True,
                                query=form.search.data)
         if form.category.data == "Users":
