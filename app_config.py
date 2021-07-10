@@ -2,7 +2,7 @@ import os
 from werkzeug.security import generate_password_hash
 
 SECRET_KEY = os.environ.get('SECRET_KEY', generate_password_hash('verySpecialKeyToKeep'))
-SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
+SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL", "lib-system.db")
 if SQLALCHEMY_DATABASE_URI.startswith("postgres://"):
     SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace("postgres://", "postgresql://", 1)
 
